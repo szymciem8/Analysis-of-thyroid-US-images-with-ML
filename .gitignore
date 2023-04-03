@@ -127,11 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-<<<<<<< HEAD
-
 
 /RawUSGimagesNRRD
 env
 /unet_collection/models/
-=======
->>>>>>> parent of e50cf85... Initial commit
+unet_collection/slurm-*.out
