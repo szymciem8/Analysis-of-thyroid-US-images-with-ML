@@ -130,6 +130,8 @@ class UltraSoundImages(Sequence):
         stacked = tf.stack([image.squeeze(), mask.squeeze()])
         for proc in self.geometric_process:
             stacked = proc(stacked)
+            
+        stacked = np.expand_dims(stacked, 3)
         return stacked
         return tf.unstack(stacked, axis=2)
     

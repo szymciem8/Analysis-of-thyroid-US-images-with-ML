@@ -132,3 +132,6 @@ dmypy.json
 env
 /unet_collection/models/
 unet_collection/slurm-*.out
+
+unet_collection/output/
+USGdataNRRD/
