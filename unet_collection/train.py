@@ -19,12 +19,13 @@ from tensorflow.keras.utils import Sequence
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import save_img
 from utils import plot_history
+# from losses import *
 
 
 parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
 parser.add_argument("-m", "--model", default='unet_2d', help="U-Net model type")
 parser.add_argument("-b", "--batch_size", default=4, type=int, help="Training batch size")
-parser.add_argument("-e", "--epochs", default=100, type=int, help="Epochs nunber")
+parser.add_argument("-e", "--epochs", default=100, type=int, help="Epochs number")
 parser.add_argument("-p", "--patiance", default=10, type=int, help="Training patiance based validation loss")
 args = vars(parser.parse_args())
 
@@ -36,7 +37,7 @@ batch_size = args['batch_size']
 epochs = args['epochs']
 patiance = args['patiance']
 image_input_shape = (512, 512, 1)
-filter_num = [64, 128, 256, 512, 1024]
+filter_num = [64, 128, 256, 512]
 
 def get_model(model_type):
     if model_type == 'unet_2d':
@@ -44,11 +45,15 @@ def get_model(model_type):
     elif model_type == 'u2net_2d':
         model = models.u2net_2d(image_input_shape, filter_num_down=filter_num, n_labels=1, output_activation='Sigmoid')
     elif model_type == 'unet_3plus_2d':
-        model = models.unet_3plus_2d(image_input_shape, n_labels=1, filter_num_down=filter_num)
+        model = models.unet_3plus_2d(image_input_shape, n_labels=1, filter_num_down=filter_num, output_activation='Sigmoid')
     elif model_type == 'transunet_2d':
-        model = models.transunet_2d(image_input_shape, filter_num=[64, 128, 256, 512], n_labels=1)
+        # model = models.transunet_2d(image_input_shape, filter_num=filter_num, n_labels=1, output_activation='Sigmoid')
+        model = models.transunet_2d((512, 512, 1), filter_num=[64, 128, 256, 512], n_labels=1, stack_num_down=2, stack_num_up=2,
+                                embed_dim=768, num_mlp=3072, num_heads=1, num_transformer=1,
+                                activation='ReLU', mlp_activation='GELU', output_activation='Sigmoid', 
+                                batch_norm=True, pool=True, unpool='bilinear', name='transunet')
     elif model_type == 'swin_unet_2d':
-        model = models.swin_unet_2d(image_input_shape, filter_num_begin=64, n_labels=1, depth=5)
+        model = models.swin_unet_2d(image_input_shape, filter_num_begin=64, n_labels=1, depth=3, output_activation='Sigmoid')
     return model
 
 
@@ -149,9 +154,9 @@ image = images[0]
 images_inter_checkpoint = ImagesInterCheckpoint(image, every_n_epoch=10)
 callbacks = [early_stopping, images_inter_checkpoint]
 
-def cutom_focal_tversky(y_true, y_pred, alpha=0.7, gamma=3/4):
+def cutom_focal_tversky(y_true, y_pred, alpha=0.7, gamma=4/3):
     
-    return losses.focal_tversky(y_true, y_pred, alpha=0.7, gamma=4/3)
+    return losses.focal_tversky(y_true, y_pred, alpha=alpha, gamma=gamma)
 
 # Train with multiple GPUs :)
 gpus = tf.config.list_logical_devices('GPU')
@@ -161,8 +166,11 @@ with strategy.scope():
     # model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-2), loss='binary_crossentropy', metrics=['accuracy'])
     # model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     # keras_unet_collection.losses
-    model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-1), loss=cutom_focal_tversky, metrics=['accuracy'])
+    model.compile(optimizer=keras.optimizers.SGD(learning_rate=5e-2), loss=cutom_focal_tversky, metrics=['accuracy'])
+    print(model.summary())
     history = model.fit(train_gen, validation_data=val_gen, epochs=epochs, callbacks=callbacks)
+    
+    # Switch loss function mid training
     
 # Save progress
 model.save(f'{model_path}model')

@@ -75,7 +75,7 @@ class UltraSoundImages(Sequence):
         if self.augment:
             output_images, output_masks = self._augment_batch(output_images, output_masks)
         
-        return np.array(output_images) / 255, np.array(output_masks) // 255
+        return np.array(output_images) / 255, np.array(output_masks) / 255
     
     def show_sample(self):
         images, masks = self.__getitem__(0)

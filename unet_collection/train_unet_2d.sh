@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH --partition=k40
+#SBATCH --nodelist=wn117
 #SBATCH -N 1
 #SBATCH --output=/home/sciemala/thyroid_analysis/unet_collection/output/unet_2d/%j.out
 
