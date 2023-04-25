@@ -135,3 +135,6 @@ unet_collection/slurm-*.out
 
 unet_collection/output/
 USGdataNRRD/
+
+.env2/
+dataUSGthyroid/

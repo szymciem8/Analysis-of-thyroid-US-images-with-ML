@@ -12,6 +12,9 @@ import matplotlib.pyplot as plt
 Article about augmentation of US images: https://www.quantib.com/blog/image-augmentation-how-to-overcome-small-radiology-datasets
 '''
 
+SAMSUNG_MASK_NORM = 15555.0
+GA_MASK_NORM = 255.0
+
 
 class UltraSoundImages(Sequence):
     """Helper to iterate over the data (as Numpy arrays)."""
@@ -66,16 +69,16 @@ class UltraSoundImages(Sequence):
     def __len__(self):
         return len(self.masks) // self.batch_size
     
-    def __getitem__(self, idx, augment=False):
+    def __getitem__(self, idx, augment=True):
         """Returns tuple (input, target) correspond to batch #idx."""
         i = idx * self.batch_size
         output_images = self.images[i : i + self.batch_size]
         output_masks = self.masks[i : i + self.batch_size]
         
-        if self.augment:
+        if self.augment and augment:
             output_images, output_masks = self._augment_batch(output_images, output_masks)
         
-        return np.array(output_images) / 255, np.array(output_masks) / 255
+        return np.array(output_images) / 255, np.array(output_masks) / 15555.0
     
     def show_sample(self):
         images, masks = self.__getitem__(0)
