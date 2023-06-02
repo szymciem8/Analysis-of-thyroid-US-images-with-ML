@@ -29,6 +29,7 @@ parser.add_argument("-b", "--batch_size", default=4, type=int, help="Training ba
 parser.add_argument("-lt", "--loss_type", default='binary_crossentropy', help="Loss function type")
 parser.add_argument("-e", "--epochs", default=100, type=int, help="Epochs number")
 parser.add_argument("-p", "--patiance", default=10, type=int, help="Training patiance based validation loss")
+parser.add_argument("-t", "--test", default=False, type=bool, help="Save model to test directory")
 args = vars(parser.parse_args())
 
 
@@ -52,17 +53,20 @@ output_path = f'{output_path}/{model_type}/{dataset_type}/'
 if not os.path.exists(output_path):
     os.mkdir(output_path)
 
-date = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M')
-output_path = f'{output_path}{date}/'
-os.mkdir(output_path)
+if args['test']:
+    directory = 'test'
+else:
+    directory = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M')
 
+output_path = f'{output_path}{directory}/'
 images_path = f'{output_path}/images/' 
 meta_path = f'{output_path}/meta/'
 model_path = f'{output_path}/model/'
-
-os.mkdir(images_path)
-os.mkdir(meta_path)
-os.mkdir(model_path)
+if not os.path.exists(output_path):
+    os.mkdir(output_path)
+    os.mkdir(images_path)
+    os.mkdir(meta_path)
+    os.mkdir(model_path)
 
 meta_data = {
     'model_type': model_type,
@@ -115,20 +119,20 @@ image = images[0]
 images_inter_checkpoint = ImagesInterCheckpoint(image, every_n_epoch=10)
 callbacks = [early_stopping, images_inter_checkpoint]
 
-# Metrics
-binary_iou = tf.keras.metrics.BinaryIoU( target_class_ids=[0, 1], threshold=0.5)
-metrics = ['accuracy', binary_iou]
-
 
 # Train with multiple GPUs :)
 gpus = tf.config.list_logical_devices('GPU')
 strategy = tf.distribute.MirroredStrategy(gpus)
 with strategy.scope():
+    # Metrics
+    mean_iou = tf.keras.metrics.MeanIoU(num_classes=2)
+    metrics = ['accuracy', mean_iou]
+    
     model = get_model(model_type, image_input_shape, filter_num)
     # model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-2), loss='binary_crossentropy', metrics=['accuracy'])
     # model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     # keras_unet_collection.losses
-    loss_func = get_loss_function(loss_type)
+    loss_func = get_loss_function(loss_type='custom_focal_tversky')
     model.compile(optimizer=keras.optimizers.SGD(learning_rate=5e-2), loss=loss_func, metrics=metrics)
     history = model.fit(train_gen, validation_data=val_gen, epochs=epochs, callbacks=callbacks)
     

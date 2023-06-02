@@ -32,7 +32,7 @@ def get_model_from_path(path_to_model):
 
 def get_loss_function(loss_type):
     if loss_type=='custom_focal_tversky':
-        def cutom_focal_tversky(y_true, y_pred, alpha=0.75, gamma=4/3):
+        def custom_focal_tversky(y_true, y_pred, alpha=0.8, gamma=4/3):
             return losses.focal_tversky(y_true, y_pred, alpha=alpha, gamma=gamma)
         return custom_focal_tversky
     return None
