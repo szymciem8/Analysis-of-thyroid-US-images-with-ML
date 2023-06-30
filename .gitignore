@@ -138,3 +138,9 @@ USGdataNRRD/
 
 .env2/
 dataUSGthyroid/
+
+*.out
+*.zip
+
+for_check/
+unet_collection/TransUnet/
