@@ -7,16 +7,14 @@ import numpy as np
 from tensorflow.keras.utils import Sequence
 import matplotlib.pyplot as plt
 
-
-'''
-Article about augmentation of US images: https://www.quantib.com/blog/image-augmentation-how-to-overcome-small-radiology-datasets
-'''
+SAMSUNG_MASK_NORM = 15555.0
+GA_MASK_NORM = 255.0
 
 
 class UltraSoundImages(Sequence):
     """Helper to iterate over the data (as Numpy arrays)."""
 
-    def __init__(self, batch_size, raw_images_paths, raw_masks_paths, augment=True, random_crop=False, size=None):
+    def __init__(self, batch_size, raw_images_paths, raw_masks_paths, dataset_type='ge', augment=True, random_crop=False, size=None, shuffle=True):
         self.MAX_SHARPNESS_LEVEL = 5
         self.MIN_CONTRAST_ADJUSTMENT = 0
         self.MAX_CONTRAST_ADJUSTMENT = 2.5
@@ -24,10 +22,17 @@ class UltraSoundImages(Sequence):
         self.ROTATION_RANGE = 15
         
         self.random_crop = random_crop
+        self.shuffle = shuffle
         self.batch_size = batch_size
         self.augment = augment
         self.images = []
         self.masks = []
+        self.dataset_type = dataset_type
+        
+        if self.dataset_type == 'samsung':
+            self.mask_normalizer = SAMSUNG_MASK_NORM
+        else:
+            self.mask_normalizer = GA_MASK_NORM
 
         self.miscellaneous_process = [
             self.sharpen,
@@ -55,7 +60,20 @@ class UltraSoundImages(Sequence):
             if size and not self.random_crop:
                 image = tf.image.resize_with_pad(image, size[0], size[1])
                 mask = tf.image.resize_with_pad(mask, size[0], size[1])
-            
+                
+            if self.dataset_type=='ge':
+                image = np.expand_dims(image[:,:,0], 2)
+                mask = np.expand_dims(mask[:,:,0] , 2)
+                
+            if self.dataset_type=='mix':
+                if mask.shape[2] == 3:
+                    image = np.expand_dims(image[:,:,0], 2)
+                    mask = np.expand_dims(mask[:,:,0] , 2)
+                    mask = mask / GA_MASK_NORM
+                else:
+                    mask = mask / SAMSUNG_MASK_NORM
+                image = image / 255
+                    
             # self.images.append(tf.convert_to_tensor(list(image)) / 255 )
             # self.masks.append(tf.convert_to_tensor(list(mask)) / 255)
             
@@ -66,16 +84,30 @@ class UltraSoundImages(Sequence):
     def __len__(self):
         return len(self.masks) // self.batch_size
     
-    def __getitem__(self, idx, augment=False):
+    def __getitem__(self, idx, augment=True):
         """Returns tuple (input, target) correspond to batch #idx."""
+        
+        # Reshuffle dataset before each epoch
+        if self.shuffle and idx==0:
+            seed = random.randint(0, 2047)
+            random.seed(seed)
+            random.shuffle(self.images)
+            random.seed(seed)
+            random.shuffle(self.masks)
+        
         i = idx * self.batch_size
         output_images = self.images[i : i + self.batch_size]
         output_masks = self.masks[i : i + self.batch_size]
         
-        if self.augment:
+        if self.augment and augment:
             output_images, output_masks = self._augment_batch(output_images, output_masks)
         
-        return np.array(output_images) / 255, np.array(output_masks) // 255
+        if self.dataset_type == 'mix':
+            return np.array(output_images), np.array(output_masks)
+        
+        output_images, output_masks = np.array(output_images) / 255, np.array(output_masks) / self.mask_normalizer
+        return np.array(output_images), np.array(output_masks)
+        # return tf.convert_to_tensor(output_images, np.float32), tf.convert_to_tensor(output_masks)
     
     def show_sample(self):
         images, masks = self.__getitem__(0)
@@ -130,6 +162,8 @@ class UltraSoundImages(Sequence):
         stacked = tf.stack([image.squeeze(), mask.squeeze()])
         for proc in self.geometric_process:
             stacked = proc(stacked)
+            
+        stacked = np.expand_dims(stacked, 3)
         return stacked
         return tf.unstack(stacked, axis=2)
     
@@ -198,3 +232,29 @@ class UltraSoundImages(Sequence):
         cropped_image = tf.image.random_crop(stacked_image, size=[2, 450, 450, 1])
         cropped_image, cropped_mask = cropped_image
         return cropped_image, cropped_mask
+    
+    
+    
+class Dataset:
+    
+    def __init__(self, kfold=4):
+        pass
+    
+    def get_fold(self, fold_id):
+        pass
+    
+    def _load_dataset(self):
+        pass
+    
+    
+    
+class Dataset:
+    
+    def __init__(self, kfold=4):
+        pass
+    
+    def get_fold(self, fold_id):
+        pass
+    
+    def _load_dataset(self):
+        pass
