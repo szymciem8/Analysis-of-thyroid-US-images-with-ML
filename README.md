@@ -194,11 +194,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ![png](report_images/output_50_4.png)
     
-# 4. Transunet
-
-For rerun
-
-'transunet_2d/samsung/320_nf4_fi1/'
+# 4. TransUnet
 
 ## 4.1. Samsung
 
