@@ -11,7 +11,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 1.1. Samsung on Samsung
 
-![png](report_images/output_13_1.png)
+<!-- ![png](report_images/output_13_1.png) -->
     
 ![png](report_images/output_13_2.png)
 
@@ -23,7 +23,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 1.2. GE on GE
 
-![png](report_images/output_15_1.png)
+<!-- ![png](report_images/output_15_1.png) -->
     
 ![png](report_images/output_15_2.png)
     
@@ -55,7 +55,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 1.5. Mix on Samsung
 
-![png](report_images/output_22_1.png)
+<!-- ![png](report_images/output_22_1.png) -->
     
 ![png](report_images/output_22_2.png)
     
@@ -72,7 +72,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 2.1. Samsung
 
-![png](report_images/output_28_1.png)
+<!-- ![png](report_images/output_28_1.png) -->
     
 ![png](report_images/output_28_2.png)
     
@@ -80,21 +80,11 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
     accuracy=0.982620849609375, precision=0.913004679939716, recall=0.823764112289993, f1=0.8660916675288518
     loss=0.24412938952445984
     
-![png](report_images/output_28_4.png)
-    
-![png](report_images/output_29_1.png)
-    
-![png](report_images/output_29_2.png)
-
-    Dice coefficient=0.8476685881614685
-    accuracy=0.975244140625, precision=0.7784213850847367, recall=0.9385380713950059, f1=0.8510138113429327
-    loss=0.20272256433963776
-    
 ![png](report_images/output_29_4.png)
 
 ## 2.2 GE
 
-![png](report_images/output_31_1.png)
+<!-- ![png](report_images/output_31_1.png) -->
     
 ![png](report_images/output_31_2.png)
 
@@ -126,7 +116,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
     
 ## 2.5. Mix on Samsung
     
-![png](report_images/output_38_1.png)
+<!-- ![png](report_images/output_38_1.png) -->
     
 ![png](report_images/output_38_2.png)
     
@@ -139,7 +129,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 # 3. Unet 3+
 ## 3.1. Samsung
 
-![png](report_images/output_42_1.png)
+<!-- ![png](report_images/output_42_1.png) -->
     
 ![png](report_images/output_42_2.png)
     
@@ -151,7 +141,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
     
 ## 3.2. GE
     
-![png](report_images/output_44_1.png)
+<!-- ![png](report_images/output_44_1.png) -->
     
 ![png](report_images/output_44_2.png)
     
@@ -184,7 +174,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## Mix
 
-![png](report_images/output_50_1.png)
+<!-- ![png](report_images/output_50_1.png) -->
     
 ![png](report_images/output_50_2.png)
     
@@ -198,7 +188,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 4.1. Samsung
 
-![png](report_images/output_54_1.png)
+<!-- ![png](report_images/output_54_1.png) -->
     
 ![png](report_images/output_54_2.png)
 
@@ -208,7 +198,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ![png](report_images/output_54_4.png)
     
-![png](report_images/output_55_1.png)
+<!-- ![png](report_images/output_55_1.png) -->
     
 ![png](report_images/output_55_2.png)
     
@@ -220,7 +210,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
     
 ## 4.2. GE
 
-![png](report_images/output_57_1.png)
+<!-- ![png](report_images/output_57_1.png) -->
     
 ![png](report_images/output_57_2.png)
 
@@ -252,7 +242,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 4.5. Mix on Samsung
 
-![png](report_images/output_64_1.png)
+<!-- ![png](report_images/output_64_1.png) -->
     
 ![png](report_images/output_64_2.png)
 
