@@ -5,13 +5,15 @@ Deep learning machine models are employed for the segmentation of tumors and pat
 Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.com/:f:/g/personal/szymcie806_student_polsl_pl/EqeQThhS8S5LotZipdUZqagBcxockNVqYzDHuLMjRVLPXw?e=LPiMM2). You have to be member of the Silesian University of Science organization in order to access those models. 
 
 
+<!-- 
+
 # Model Evaluation
     
 ## 1. Classic U-Net
 
 ## 1.1. Samsung on Samsung
 
-<!-- ![png](report_images/output_13_1.png) -->
+![png](report_images/output_13_1.png)
     
 ![png](report_images/output_13_2.png)
 
@@ -23,7 +25,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 1.2. GE on GE
 
-<!-- ![png](report_images/output_15_1.png) -->
+![png](report_images/output_15_1.png) 
     
 ![png](report_images/output_15_2.png)
     
@@ -55,7 +57,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 1.5. Mix on Samsung
 
-<!-- ![png](report_images/output_22_1.png) -->
+![png](report_images/output_22_1.png)
     
 ![png](report_images/output_22_2.png)
     
@@ -72,7 +74,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 2.1. Samsung
 
-<!-- ![png](report_images/output_28_1.png) -->
+![png](report_images/output_28_1.png)
     
 ![png](report_images/output_28_2.png)
     
@@ -84,7 +86,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 2.2 GE
 
-<!-- ![png](report_images/output_31_1.png) -->
+![png](report_images/output_31_1.png)
     
 ![png](report_images/output_31_2.png)
 
@@ -116,7 +118,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
     
 ## 2.5. Mix on Samsung
     
-<!-- ![png](report_images/output_38_1.png) -->
+![png](report_images/output_38_1.png)
     
 ![png](report_images/output_38_2.png)
     
@@ -129,7 +131,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 # 3. Unet 3+
 ## 3.1. Samsung
 
-<!-- ![png](report_images/output_42_1.png) -->
+[png](report_images/output_42_1.png)
     
 ![png](report_images/output_42_2.png)
     
@@ -141,7 +143,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
     
 ## 3.2. GE
     
-<!-- ![png](report_images/output_44_1.png) -->
+![png](report_images/output_44_1.png)
     
 ![png](report_images/output_44_2.png)
     
@@ -174,7 +176,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## Mix
 
-<!-- ![png](report_images/output_50_1.png) -->
+![png](report_images/output_50_1.png)
     
 ![png](report_images/output_50_2.png)
     
@@ -188,7 +190,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 4.1. Samsung
 
-<!-- ![png](report_images/output_54_1.png) -->
+![png](report_images/output_54_1.png)
     
 ![png](report_images/output_54_2.png)
 
@@ -198,7 +200,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ![png](report_images/output_54_4.png)
     
-<!-- ![png](report_images/output_55_1.png) -->
+![png](report_images/output_55_1.png)
     
 ![png](report_images/output_55_2.png)
     
@@ -210,7 +212,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
     
 ## 4.2. GE
 
-<!-- ![png](report_images/output_57_1.png) -->
+![png](report_images/output_57_1.png)
     
 ![png](report_images/output_57_2.png)
 
@@ -242,7 +244,7 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ## 4.5. Mix on Samsung
 
-<!-- ![png](report_images/output_64_1.png) -->
+![png](report_images/output_64_1.png)
     
 ![png](report_images/output_64_2.png)
 
@@ -252,9 +254,11 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 ![png](report_images/output_64_4.png)
 
-# 5. Compare metrics
+-->
 
-## 5.1. Samsung on Samsung
+# Comparison
+## Samsung on Samsung
+### Metrics
     
 | Metryki            | U-Net             | U$^2$-Net         | U-Net 3+          | TransUnet         |
 |--------------------|-------------------|-------------------|-------------------|-------------------|
@@ -267,18 +271,19 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 | IoU                | 0.655 +- 3.01e-02 | 0.669 +- 1.58e-02 | 0.625 +- 8.81e-03 | 0.601 +- 3.21e-02 |
 | ROC AUC            | 0.946 +- 6.29e-03 | 0.988 +- 6.18e-04 | 0.932 +- 6.76e-03 | 0.96 +- 5.72e-03  |
     
-
 ![png](report_images/output_74_0.png)
 
+### ROC curves
 ![png](report_images/output_75_0.png)
-    
+
+### Predictions examples
 ![png](report_images/output_76_0.png)
     
-![png](report_images/output_77_0.png)
+<!-- ![png](report_images/output_77_0.png) -->
     
 
-
-## 5.2. GE on GE
+## GE on GE
+### Metrics
     
 | Metryki            | U-Net             | U$^2$-Net         | U-Net 3+          | TransUnet         |
 |--------------------|-------------------|-------------------|-------------------|-------------------|
@@ -291,16 +296,18 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 | IoU                | 0.538 +- 1.68e-02 | 0.54 +- 1.62e-02  | 0.55 +- 5.69e-03  | 0.555 +- 2.20e-02 |
 | ROC AUC            | 0.895 +- 8.19e-03 | 0.961 +- 1.60e-03 | 0.907 +- 5.08e-03 | 0.938 +- 3.22e-03 |
 
-    
 ![png](report_images/output_82_0.png)
-       
+
+### ROC curves
 ![png](report_images/output_83_0.png)
-    
+
+### Predictions examples
 ![png](report_images/output_84_0.png)
+
+<!-- ![png](report_images/output_85_0.png) -->
     
-![png](report_images/output_85_0.png)
-    
-## 5.3. Samsung on GE
+## Samsung on GE
+### Metrics
     
 | Metryki            | U-Net             | U$^2$-Net         | U-Net 3+          | TransUnet         |
 |--------------------|-------------------|-------------------|-------------------|-------------------|
@@ -313,18 +320,19 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 | IoU                | 0.273 +- 3.57e-02 | 0.179 +- 1.43e-02 | 0.222 +- 6.59e-02 | 0.223 +- 2.10e-02 |
 | ROC AUC            | 0.835 +- 1.56e-02 | 0.908 +- 4.07e-03 | 0.839 +- 2.54e-02 | 0.825 +- 1.57e-02 |
     
-
 ![png](report_images/output_89_0.png)
-    
+
+### ROC curves
 ![png](report_images/output_90_0.png)
-    
+
+### Predictions examples
 ![png](report_images/output_91_0.png)
     
-![png](report_images/output_92_0.png)
+<!-- ![png](report_images/output_92_0.png) -->
     
 
-## 5.4. GE on Samsung
-
+## GE on Samsung
+### Metrics
 | Metryki            | U-Net             | U$^2$-Net         | U-Net 3+          | TransUnet         |
 |--------------------|-------------------|-------------------|-------------------|-------------------|
 | Focal Tversky      | 0.391 +- 2.27e-02 | 0.434 +- 1.91e-02 | 0.398 +- 2.74e-02 | 0.381 +- 1.48e-02 |
@@ -336,20 +344,18 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 | IoU                | 0.556 +- 2.72e-02 | 0.51 +- 2.62e-02  | 0.559 +- 1.85e-02 | 0.548 +- 2.03e-02 |
 | ROC AUC            | 0.899 +- 1.81e-02 | 0.959 +- 7.84e-03 | 0.866 +- 2.16e-02 | 0.945 +- 4.32e-03 |
 
-    
 ![png](report_images/output_96_0.png)
-    
+
+### ROC curves
 ![png](report_images/output_97_0.png)
 
-    
+### Predictions examples
 ![png](report_images/output_98_0.png)
     
-![png](report_images/output_99_0.png)
+<!-- ![png](report_images/output_99_0.png) -->
     
-
-
-## 5.5. Mix on Samsung
-
+## Mix on Samsung
+### Metrics
     
 | Metryki            | U-Net             | U$^2$-Net         | U-Net 3+          | TransUnet         |
 |--------------------|-------------------|-------------------|-------------------|-------------------|
@@ -362,14 +368,15 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 | IoU                | 0.581 +- 4.47e-02 | 0.691 +- 1.31e-02 | 0.644 +- 7.90e-03 | 0.68 +- 1.30e-02  |
 | ROC AUC            | 0.932 +- 4.91e-03 | 0.989 +- 1.19e-03 | 0.942 +- 1.24e-02 | 0.97 +- 2.75e-03  |
 
-    
 ![png](report_images/output_104_0.png)
 
+### ROC curves
 ![png](report_images/output_105_0.png)
     
 
-## 5.5. Mix on GE
-    
+## Mix on GE
+### Metrics
+
 | Metryki            | U-Net             | U$^2$-Net         | U-Net 3+          | TransUnet         |
 |--------------------|-------------------|-------------------|-------------------|-------------------|
 | Focal Tversky      | 0.386 +- 3.43e-02 | 0.333 +- 7.39e-03 | 0.364 +- 9.64e-03 | 0.322 +- 4.21e-03 |
@@ -382,9 +389,11 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 | ROC AUC            | 0.895 +- 1.35e-02 | 0.969 +- 1.61e-03 | 0.897 +- 1.90e-02 | 0.933 +- 6.79e-03 |
 
 ![png](report_images/output_109_0.png)
-    
+
+### ROC curves
 ![png](report_images/output_110_0.png)
-    
+
+<!-- 
 ## 6. Generate images
 ## 6.1. Samsung images
 
@@ -442,3 +451,4 @@ Trained models can be downloaded from [OneDrive](https://polslpl-my.sharepoint.c
 
 **The worst**    
 ![png](report_images/output_150_0.png)
+-->
